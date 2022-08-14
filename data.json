@@ -1,0 +1,37 @@
+[
+    {
+        "id":1,
+        "nombre": "FERNET",
+        "precio": 1200,
+        "descripcion": "Fernet Branca 750 ml",
+        "imagen": "img/fernet-branca-750.jpg"
+    },
+    {
+        "id":2,
+        "nombre": "NUEZ",
+        "precio": 99.99,
+        "descripcion": "Nueces con cáscara por 100 gramos",
+        "imagen": "img/nueces.jpeg"
+    },
+    {
+        "id":3,
+        "nombre": "ALMENDRA",
+        "precio": 89.99,
+        "descripcion": "Almendras por 100 gramos",
+        "imagen": "img/almendras.jpg"
+    },
+    {
+        "id":4,
+        "nombre": "BARRITA",
+        "precio": 80,
+        "descripcion": "Barrita de cereales",
+        "imagen": "img/barrita-cereal.jpg"
+    },
+    {
+        "id":5,
+        "nombre": "ARROZ",
+        "precio": 39.99,
+        "descripcion": "Arroz yamaní por 100 gramos",
+        "imagen": "img/arroz-yamani.jpg"
+    }
+]
