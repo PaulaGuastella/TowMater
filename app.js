@@ -1,5 +1,5 @@
-import { actualizarCarrito } from "./actualizarCarrito.js";
-import { mostrarCarrito, obtenerCarritoStorage } from "./carritoIndex.js";
+import { actualizarCarrito, renderCarrito } from "./actualizarCarrito.js";
+import { mostrarCarrito } from "./carritoIndex.js";
 import getData from "./getData.js";
 
 
@@ -51,6 +51,7 @@ export const agregarAlCarrito = async() =>
             {
                 productoEnCarrito.cantidad++;
                 guardarCarritoStorage(productoEnCarrito);
+                document.getElementById(`cantidad${productoEnCarrito.id}`).innerHTML = `<h4 id=cantidad${productoEnCarrito.cantidad}>Cantidad: ${productoEnCarrito.cantidad}</h4>`;
             }
             else
             {   
@@ -72,7 +73,7 @@ export const agregarAlCarrito = async() =>
 //UTILIZO LOCAL STORAGE PARA GUARDAR PRODUCTOS DEL CARRITO
 const guardarCarritoStorage = (product) =>
 {
-    let cart = JSON.parse(localStorage.getItem('miCarrito'));
+    const cart = JSON.parse(localStorage.getItem('miCarrito'));
     
     if(!cart)
     {
@@ -85,18 +86,24 @@ const guardarCarritoStorage = (product) =>
     }
     const filterProducts = cart.filter(producto => producto.id !== product.id)
     filterProducts.push(product);
-    mostrarCarrito(cart);
-    actualizarCarrito(cart);
     localStorage.setItem("miCarrito", JSON.stringify(filterProducts));
+    const carritoActualizado = JSON.parse(localStorage.getItem('miCarrito'));
+    renderCarrito(carritoActualizado);
+    actualizarCarrito(carritoActualizado);
 };
 
 
 //CREAR UN BUSCADOR CON EL INPUT
 //Con evento input, guardo lo que pone el usuario en el buscador
+let productoBuscado = "";
+
 export const busqueda = () => {
-    let buscador = document.getElementById("buscador")
-    buscador.addEventListener("input", () => {
-        console.log(buscador.value);
+    let buscador = document.getElementById('buscador')
+    buscador.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = document.getElementById('busqueda').value;
+        productoBuscado.push = input;
+        console.log(productoBuscado);
 
     })
 }

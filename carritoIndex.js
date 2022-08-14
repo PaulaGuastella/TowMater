@@ -1,6 +1,6 @@
 import{actualizarCarrito,renderCarrito} from "./actualizarCarrito.js";
 
-function cargarEventos() {
+export function cargarEventos() {
     let botones = document.getElementsByClassName('eliminar-producto');
     for (const boton of botones) {
         boton.addEventListener('click', () => {
@@ -20,7 +20,7 @@ export const mostrarCarrito = (storage) => {
                 <img src="${item.imagen}" alt="${item.descripcion}">
                 <h3>Producto: ${item.nombre}</h3>
                 <h4>Pr.Unit.: $${item.precio}</h4>
-                <h4> Cantidad: <input type="number" name="cantidad" class='button cantidad' value = ${item.cantidad}></h4>
+                <h4 id=cantidad${item.id}>Cantidad: ${item.cantidad}</h4>
                 <h4>Total: $${(item.precio*item.cantidad).toFixed()}</h4>
                 <btn  id="${item.id}" class="eliminar-producto">Eliminar Producto</btn>
         `;
@@ -34,38 +34,37 @@ export const mostrarCarrito = (storage) => {
 
 export const obtenerCarritoStorage = () => {
 const carritoStorage = JSON.parse(localStorage.getItem("miCarrito"));
-    mostrarCarrito(carritoStorage);
+    //mostrarCarrito(carritoStorage);
+    limpiarCarrito(carritoStorage);
 };
 
-// Funcion limpiar el carrito: Agregar que debe correrse solo cuando el carrito <> 0
 export function limpiarCarrito(carrito) {
     const btnClearCard = document.getElementById('limpiar-carrito');
         btnClearCard.addEventListener('click', () => {
-        
-        swal({
-            title: '¿Está seguro que desea vaciar el carrito?',
-            icon:'warning',
-            buttons: true,
-            
-            dangerMode: true
-        }).then(result => {
-            if(result) {
+            if(carrito){
                 swal({
-                    title: 'Carrito vacío',
-                    icon: 'success',
-                    text: 'Se ha vaciado el carrito con éxito!',
-                })
-                location.reload();
-                localStorage.clear();
-                actualizarCarrito(carrito);
-                renderCarrito(carrito);
+                    title: '¿Está seguro que desea vaciar el carrito?',
+                    icon:'warning',
+                    buttons: true,
+                    dangerMode: true
+                }).then(result => {
+                    if(result) {
+                        swal({
+                            title: 'Carrito vacío',
+                            icon: 'success',
+                            text: 'Se ha vaciado el carrito con éxito!',
+                            })
+                    location.reload();
+                    localStorage.clear();
+                    actualizarCarrito(carrito);
+                    renderCarrito(carrito);
+                    }
+            })}else {
+                btnClearCard.setAttribute('class','disabled')
             }
         })
-    })
-};
+    };
 
-
-// Funcion para eliminar un producto del carrito: Agregar que debe correrse solo cuando el carrito <> 0
 function eliminarProducto(id) {
         swal({
             title: '¿Está seguro que desea eliminar el producto del carrito?',
@@ -87,23 +86,3 @@ function eliminarProducto(id) {
             }        
         })  
 };
-
-
-
-
-
-// Función que suma el total del CARRITO
-/* function sumarTotal (producto){
-    let total = 0;
-    producto.forEach(producto => {
-        total += producto.cantidad * producto.precio;
-    });
-    mostrarTotal(total);
-};
-
-//Función que actualiza el total en el DOM
-function mostrarTotal (sumaTotal) {
-    let totalProductos = document.getElementById('total-productos');
-    totalProductos.innerText = `El total de su compra es: $${sumaTotal.toFixed()}` 
-}; */
-

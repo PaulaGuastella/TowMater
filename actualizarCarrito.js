@@ -1,3 +1,4 @@
+import { cargarEventos, limpiarCarrito} from "./carritoIndex.js";
 
 
 export function actualizarCarrito (carrito){
@@ -20,10 +21,11 @@ export function renderCarrito (carrito){
                 <img src="${item.imagen}" alt="${item.descripcion}">
                 <h3>Producto: ${item.nombre}</h3>
                 <h4>Pr.Unit.: $${item.precio}</h4>
-                <h4> Cantidad: <input type="number" name="cantidad" class='button cantidad' value = ${item.cantidad}></h4>
+                <h4 id=cantidad${item.id}>Cantidad: ${item.cantidad}</h4>
                 <h4>Total: $${(item.precio*item.cantidad).toFixed()}</h4>
                 <btn  id="${item.id}" class="eliminar-producto">Eliminar Producto</btn>
         `;
         seleccionProductos.appendChild(li);
+        cargarEventos(carrito);
     };
 }

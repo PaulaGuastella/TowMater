@@ -165,7 +165,7 @@
 }
 
 .card-carrito {
-    width: 60vw;
+    width: 65vw;
     height: 10vw;
     margin: 1.5vw 15vw;
     display: flex;
@@ -181,12 +181,12 @@
     align-self: center;
 }
 .card-carrito h3 {
-    width: 5vw;
-    margin: 3vw
+    width: 7vw;
+    margin: 1vw
 }
 .card-carrito h4 {
-    width: 3vw;
-    margin: 3vw;
+    width: 5vw;
+    margin: 1vw;
 }
 .card-carrito h5 {
     width: 3vw;
